@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: client
+  template:
+    metadata:
+      labels:
+        app: client
+    spec:
+      containers:
+      - name: client
+        image: us-central1-docker.pkg.dev/shaunak-tmp/fastapi/client:latest
+        imagePullPolicy: Always
+        env:
+        - name: SERVER
+          value: "fastapi-service.svc.cluster.local"
+        - name: PORT
+          value: "8000"
+        - name: NUM_REQUESTS
+          value: "3"

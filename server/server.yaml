@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: fastapi-app
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
       app: fastapi
@@ -14,13 +14,16 @@ spec:
     spec:
       containers:
       - name: fastapi
-        image:   
- us-central1-docker.pkg.dev/<your-project>/<your-repository>/fastapi:latest
+        image: us-central1-docker.pkg.dev/shaunak-tmp/fastapi/fastapi:latest
+        imagePullPolicy: Always
         ports:
         - containerPort: 8000
         env:
-        - name: SOME_ENV_VAR
-          value: "some_value"  # Example environment variable
+        - name: PORT
+          value: "8000"
+
+
+---
 
 apiVersion: v1
 kind: Service
@@ -31,6 +34,5 @@ spec:
     app: fastapi
   ports:
   - protocol: TCP
-    port: 80
-    targetPort:   
- 8000
+    port: 8000
+    targetPort: 8000

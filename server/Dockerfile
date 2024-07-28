@@ -11,8 +11,6 @@ COPY py/ .
 # Set the default port if not provided
 ENV PORT=8000
 
-RUN echo $PORT
-
 # Expose the port dynamically
 EXPOSE ${PORT}
 

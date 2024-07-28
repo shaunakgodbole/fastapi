@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: client
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: client
@@ -18,8 +18,8 @@ spec:
         imagePullPolicy: Always
         env:
         - name: SERVER
-          value: "fastapi-service.svc.cluster.local"
+          value: "fastapi-service"
         - name: PORT
           value: "8000"
         - name: NUM_REQUESTS
-          value: "3"
+          value: "100"
